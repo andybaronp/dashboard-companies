@@ -3,6 +3,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { UserButton } from '@clerk/nextjs'
 import { Menu, Search } from 'lucide-react'
 import SidebarRoutes from '../SidebarRoutes/SidebarRoutes'
+import { ToggleTheme } from '../ToggleTheme/ToggleTheme'
 const Navbar = () => {
   return (
     <nav className='flex items-center justify-between px-2 gap-x-4 md:px-6 w-full bg-background border-b h-20'>
@@ -21,7 +22,7 @@ const Navbar = () => {
         <Search strokeWidth={1} className='absolute right-2 top-2  ' />
       </div>
       <div className='flex gap-x-2 items-center'>
-        <p>Tootle theme</p>
+        <ToggleTheme />
         <UserButton />
       </div>
     </nav>

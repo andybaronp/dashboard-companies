@@ -3,8 +3,8 @@ import SidebarRoutes from '../SidebarRoutes/SidebarRoutes'
 
 const Sidebar = () => {
   return (
-    <div className='h-screen'>
-      <div className='h-full flex flex-col border-1'>
+    <div className='h-screen '>
+      <div className='h-full flex flex-col border-r'>
         <Logo />
         <SidebarRoutes />
       </div>
