@@ -2,6 +2,7 @@ import { Input } from '@/components/ui/input'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { UserButton } from '@clerk/nextjs'
 import { Menu, Search } from 'lucide-react'
+import SidebarRoutes from '../SidebarRoutes/SidebarRoutes'
 const Navbar = () => {
   return (
     <nav className='flex items-center justify-between px-2 gap-x-4 md:px-6 w-full bg-background border-b h-20'>
@@ -11,7 +12,7 @@ const Navbar = () => {
             <Menu />
           </SheetTrigger>
           <SheetContent side={'left'}>
-            <p>Sidebar routes</p>
+            <SidebarRoutes />
           </SheetContent>
         </Sheet>
       </div>
