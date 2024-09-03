@@ -3,6 +3,7 @@ import { BookOpenCheck, UsersRound, Waypoints } from 'lucide-react'
 import LastCustomers from './components/LastCustomers/LasCustomers'
 import SalesDistributors from './components/SalesDistributors/SalesDistributors'
 import TotalSuscribers from './components/TotalSuscribers/TotalSuscribers'
+import ListIntegrations from './components/ListIntegrations/ListIntegrations'
 
 const dataCardsSumary = [
   {
@@ -40,9 +41,9 @@ export default function Home() {
         <LastCustomers />
         <SalesDistributors />
       </div>
-      <div className='felx-col xl:flex xl:flex-row gap-y-4 md:gap-y-0 mt-2 md:mb-10 justify-center  '>
+      <div className='md:gap-x-10 felx-col xl:flex xl:flex-row gap-y-4 md:gap-y-0 mt-2 md:mb-10 justify-center  '>
         <TotalSuscribers />
-        <p>List integrations</p>
+        <ListIntegrations />
       </div>
     </div>
   )
