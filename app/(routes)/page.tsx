@@ -1,5 +1,6 @@
 import { CardSumary } from './components/CardSumary/'
 import { BookOpenCheck, UsersRound, Waypoints } from 'lucide-react'
+import LastCustomers from './components/LastCustomers/LasCustomers'
 
 const dataCardsSumary = [
   {
@@ -32,6 +33,10 @@ export default function Home() {
         {dataCardsSumary.map((card) => (
           <CardSumary key={card.title} {...card} />
         ))}
+      </div>
+      <div className='grid grid-cols-1 xl:grid-cols-2 md:gap-x-10 mt-2 '>
+        <LastCustomers />
+        <p>Sales distributos</p>
       </div>
     </div>
   )
