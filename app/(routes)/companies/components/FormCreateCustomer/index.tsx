@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-
+import { Toaster } from '@/components/ui/toaster'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -23,6 +23,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { UploadButton } from '@/app/utils/uploadthing'
+import { toast } from '@/hooks/use-toast'
 const formSchema = z.object({
   name: z.string(),
   country: z.string().min(2),
@@ -154,18 +156,36 @@ export const FormCreateCustomer = (props: FormCreateCustomerType) => {
                 <FormItem>
                   <FormLabel>Profile Image</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder='+1 (555) 000-0000'
-                      {...field}
-                      type='text'
-                    />
+                    {photoUploade ? (
+                      <p className='text-sm'>Image Uploade</p>
+                    ) : (
+                      <UploadButton
+                        className='bg-slate-600/20 text-slate-800 rounded-lg outline-dotted outline-2 '
+                        {...field}
+                        endpoint='profileImage'
+                        onClientUploadComplete={(res) => {
+                          form.setValue('profileImage', res[0].url)
+                          toast({
+                            title: 'File uploaded',
+                          })
+                          setPhotoUploade(true)
+                        }}
+                        onUploadError={(err: Error) => {
+                          toast({
+                            title: 'Error uploading file',
+                          })
+                        }}
+                      />
+                    )}
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
           </div>
-          <Button type='submit'>Submit</Button>
+          <Button type='submit' disabled={!isValid}>
+            Submit
+          </Button>
         </form>
       </Form>
     </div>
