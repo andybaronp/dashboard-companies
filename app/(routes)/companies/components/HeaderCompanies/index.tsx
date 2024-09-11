@@ -28,7 +28,7 @@ const HeaderCompanies = () => {
             </DialogDescription>
           </DialogHeader>
 
-          <FormCreateCustomer />
+          <FormCreateCustomer stOpenModalCreate={setOpenModalCreate} />
         </DialogContent>
       </Dialog>
     </div>

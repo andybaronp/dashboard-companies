@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import { Toaster } from '@/components/ui/toaster'
+import axios from 'axios'
 import { Button } from '@/components/ui/button'
 import {
   Form,
@@ -25,16 +25,18 @@ import {
 } from '@/components/ui/select'
 import { UploadButton } from '@/app/utils/uploadthing'
 import { toast } from '@/hooks/use-toast'
+import { useRouter } from 'next/navigation'
 const formSchema = z.object({
   name: z.string(),
   country: z.string().min(2),
-  website: z.string().min(2),
+  webSite: z.string().min(2),
   phone: z.string().min(6),
   cif: z.string().min(6),
   profileImage: z.string(),
 })
 export const FormCreateCustomer = (props: FormCreateCustomerType) => {
   const { stOpenModalCreate } = props
+  const router = useRouter()
   const [photoUploade, setPhotoUploade] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -42,7 +44,7 @@ export const FormCreateCustomer = (props: FormCreateCustomerType) => {
     defaultValues: {
       name: '',
       country: '',
-      website: '',
+      webSite: '',
       phone: '',
       cif: '',
       profileImage: '',
@@ -52,7 +54,19 @@ export const FormCreateCustomer = (props: FormCreateCustomerType) => {
   const { isValid } = form.formState
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    console.log(data)
+    try {
+      await axios.post('api/company', data)
+      toast({
+        title: 'Customer created successfully',
+      })
+      router.refresh()
+      stOpenModalCreate(false)
+    } catch (error) {
+      toast({
+        title: 'Error creating customer',
+        variant: 'destructive',
+      })
+    }
   }
   return (
     <div>
@@ -104,7 +118,7 @@ export const FormCreateCustomer = (props: FormCreateCustomerType) => {
             />
             <FormField
               control={form.control}
-              name='website'
+              name='webSite'
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Website</FormLabel>
@@ -183,7 +197,7 @@ export const FormCreateCustomer = (props: FormCreateCustomerType) => {
               )}
             />
           </div>
-          <Button type='submit' disabled={!isValid}>
+          <Button type='submit' disabled={!isValid || !photoUploade}>
             Submit
           </Button>
         </form>
